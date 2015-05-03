@@ -14,7 +14,7 @@ Examples
 	c.warning("this is a warning");
 	c.mark("this is a mark: stage#1");
 	c.ask("this is a question");
-![](https://github.com/Wu-Hong/Console/blob/master/pix/color_text.png "")
+![](https://github.com/Wu-Hong/Console/blob/master/pix/color_text.png "example")
 
 #### Use the timer.
 	c.turnOnTimer();
@@ -42,21 +42,21 @@ Examples
 	{
 		cout<<"options: "<<iter->first<<" value: "<<iter->second<<endl;
 	}
-![](https://github.com/Wu-Hong/Console/blob/master/pix/cmd_parser.png "")
+![](https://github.com/Wu-Hong/Console/blob/master/pix/cmd_parser.png "example")
 
 ### Use debug printer
 	DEBUG();
-![](https://github.com/Wu-Hong/Console/blob/master/pix/debug_printer.png "")
+![](https://github.com/Wu-Hong/Console/blob/master/pix/debug_printer.png "example")
 
 ### Get system version
 	cout<<c.getSystemVersion()<<endl;
 
 ### Get current time
 	c.printCurrentTime();
-![](https://github.com/Wu-Hong/Console/blob/master/pix/current_time.png "")
+![](https://github.com/Wu-Hong/Console/blob/master/pix/current_time.png "example")
 
 ### Create password
 	c.mark("the new password is: " + c.createPassword());
-![](https://github.com/Wu-Hong/Console/blob/master/pix/create_passwd.png "")
+![](https://github.com/Wu-Hong/Console/blob/master/pix/create_passwd.png "example")
 
 
