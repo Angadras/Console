@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 	vector<string> options;
 	options.push_back("-iabc");
 	options.push_back("-d");
-	
+
 	c.initCommandLineParser(argc, argv, options);
 	c.setDefaultValue("-iabc", 6);
 	c.setDefaultValue("-d",323);

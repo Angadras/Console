@@ -26,7 +26,7 @@ void Console::warning(string s)
 
 /*void Console::prompt(string s)
 {
-	templateCout(s, WHITE);
+templateCout(s, WHITE);
 }*/
 
 void Console::mark(string s)
@@ -200,7 +200,7 @@ string Console::getSystemVersion()
 void Console::printCurrentTime()
 {
 	time_t t;
-    time(&t);
+	time(&t);
 	cout<<ctime(&t);
 }
 
