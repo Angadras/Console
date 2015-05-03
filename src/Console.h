@@ -6,6 +6,8 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <ctype.h>
+#include <conio.h>
 #include <string.h>
 #include <sstream>
 #include <stdlib.h>
@@ -43,6 +45,8 @@
 //***************时间单位*****************************
 #define S   0
 #define MS  1
+//***************密码最大长度*************************
+#define MAX_PASSWD_LEN 16
 
 using std::string;
 using std::map;
@@ -83,6 +87,9 @@ public:
 	void pause();
 	//获取操作系统版本
 	string getSystemVersion();
+	//输入密码同时回显星号
+	char* getPassword();
+	string getSavedPassword();
 private:
 	//***********************Color cout*********************************
 	void setConsoleTextColor(unsigned short ForeColor = WHITE, unsigned short BackGroundColor = BLACK);
@@ -97,6 +104,7 @@ private:
 	//***********************计时**************************************
 	clock_t startTime;
 	clock_t endTime;
+	static char s_passwd[MAX_PASSWD_LEN + 1];
 };
 
 template <class T> void Console::setDefaultValue(string option, T value)

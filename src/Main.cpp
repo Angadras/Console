@@ -29,5 +29,8 @@ int main(int argc, char** argv)
 	c.printCurrentTime();
 	cout<<c.getTimeDiff(MS)<<endl;
 	cout<<c.getSystemVersion()<<endl;
+	c.ask("please input your password: ");
+	c.getPassword();
+	c.mark("the password is: " + c.getSavedPassword());
 	return 0;
 }

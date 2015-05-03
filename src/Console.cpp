@@ -1,5 +1,7 @@
 #include "Console.h"
 
+char Console::s_passwd[MAX_PASSWD_LEN + 1] = "";
+
 void Console::setConsoleTextColor(unsigned short ForeColor,unsigned short BackGroundColor)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (ForeColor%16)|(BackGroundColor%16*16));
@@ -35,7 +37,7 @@ void Console::mark(string s)
 void Console::ask(string s)
 {
 	templateCout(s, B_WHITE);
-	cout<<">>";
+	cout<<">> ";
 }
 
 void Console::initCommandLineParser(int argc, char** argv, vector<string> options)
@@ -200,4 +202,35 @@ void Console::printCurrentTime()
 	time_t t;
     time(&t);
 	cout<<ctime(&t);
+}
+
+char* Console::getPassword()
+{
+	unsigned char c;
+	int i = 0;
+
+	while ((c=_getch())!='\r')
+	{
+		if (i<MAX_PASSWD_LEN && isprint(c))
+		{
+			s_passwd[i++] = c;
+			putchar('*');
+		}
+		else if (i>0 && c=='\b')
+		{
+			--i;
+			//转义字符\b的作用仅仅是让光标退一格，不具有删除功能，所以采用如下方法实现退格并删除字符的效果
+			putchar('\b');//首先退一格
+			putchar(' ');//然后使用空格将当前光标所在字符覆盖
+			putchar('\b');//最后再退一格
+		}
+	}
+	putchar('\n');
+	s_passwd[i] = '\0';
+	return s_passwd;
+}
+
+string Console::getSavedPassword()
+{
+	return s_passwd;
 }
