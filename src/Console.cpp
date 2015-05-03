@@ -1,7 +1,5 @@
 #include "Console.h"
 
-char Console::s_passwd[MAX_PASSWD_LEN + 1] = "";
-
 void Console::setConsoleTextColor(unsigned short ForeColor,unsigned short BackGroundColor)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (ForeColor%16)|(BackGroundColor%16*16));
@@ -204,16 +202,22 @@ void Console::printCurrentTime()
 	cout<<ctime(&t);
 }
 
-char* Console::getPassword()
+string Console::createPassword()
 {
 	unsigned char c;
 	int i = 0;
+	char passwd_1[MAX_PASSWD_LEN + 1]="";
+	char passwd_2[MAX_PASSWD_LEN + 1]="";
+	string passwd;
 
+	ask("Please enter the password to be created");
+FIRST: 
+	i = 0;
 	while ((c=_getch())!='\r')
 	{
 		if (i<MAX_PASSWD_LEN && isprint(c))
 		{
-			s_passwd[i++] = c;
+			passwd_1[i++] = c;
 			putchar('*');
 		}
 		else if (i>0 && c=='\b')
@@ -226,11 +230,40 @@ char* Console::getPassword()
 		}
 	}
 	putchar('\n');
-	s_passwd[i] = '\0';
-	return s_passwd;
-}
+	passwd_1[i] = '\0';
 
-string Console::getSavedPassword()
-{
-	return s_passwd;
+	ask("Please enter it again");
+SECOND: 
+	i = 0;
+	while ((c=_getch())!='\r')
+	{
+		if (i<MAX_PASSWD_LEN && isprint(c))
+		{
+			passwd_2[i++] = c;
+			putchar('*');
+		}
+		else if (i>0 && c=='\b')
+		{
+			--i;
+			//转义字符\b的作用仅仅是让光标退一格，不具有删除功能，所以采用如下方法实现退格并删除字符的效果
+			putchar('\b');//首先退一格
+			putchar(' ');//然后使用空格将当前光标所在字符覆盖
+			putchar('\b');//最后再退一格
+		}
+	}
+	putchar('\n');
+	passwd_2[i] = '\0';
+
+	if(strcmp(passwd_1, passwd_2))
+	{
+		//两次输入不等，重新输入
+		ask("Two passwords are not identical, please re-enter");
+		goto FIRST;
+	}
+	else
+	{
+		passwd = passwd_1;
+	}
+
+	return passwd;
 }

@@ -80,16 +80,15 @@ public:
 	//**********************计时****************************************
 	void turnOnTimer();
 	void turnOffTimer();
-	double getTimeDiff(int timeUnit);
+	double getTimeDiff(int timeUnit=MS);
 	//**********************其它****************************************
 	//获取系统当前时间，格式为Sat May 02 17:32:15 2015，自带换行
 	void printCurrentTime();
 	void pause();
 	//获取操作系统版本
 	string getSystemVersion();
-	//输入密码同时回显星号
-	char* getPassword();
-	string getSavedPassword();
+	//创建密码同时回显星号，请在使用该函数时务必保存其返回值
+	string createPassword();
 private:
 	//***********************Color cout*********************************
 	void setConsoleTextColor(unsigned short ForeColor = WHITE, unsigned short BackGroundColor = BLACK);
@@ -104,7 +103,6 @@ private:
 	//***********************计时**************************************
 	clock_t startTime;
 	clock_t endTime;
-	static char s_passwd[MAX_PASSWD_LEN + 1];
 };
 
 template <class T> void Console::setDefaultValue(string option, T value)
