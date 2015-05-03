@@ -46,7 +46,7 @@
 #define S   0
 #define MS  1
 //***************密码最大长度*************************
-#define MAX_PASSWD_LEN 16
+#define MAX_PASSWD_LEN 20
 
 using std::string;
 using std::map;
