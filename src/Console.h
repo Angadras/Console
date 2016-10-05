@@ -1,4 +1,4 @@
-//Console = CmdParser + Console + ÆäËü¹¦ÄÜ
+//Console = CmdParser + Console + å…¶å®ƒåŠŸèƒ½
 #ifndef _CONSOLE_H_
 #define _CONSOLE_H_
 
@@ -15,37 +15,23 @@
 #include <stdio.h>
 #include <windows.h>
 
-//*****************************ÓÃÓÚÊä³öµ÷ÊÔĞÅÏ¢µÄ¹¤¾ß*********************
-#define __DEBUG__//²»ÏëÁî´úÂëÖĞµÄDEBUGÏÔÊ¾ĞÅÏ¢Ê±¿ÉÒÔ×¢ÊÍ¸ÃÖ¸Áî»ò½«Æä¸ÄÎª#undef __DEBUG__ 
+//*****************************ç”¨äºè¾“å‡ºè°ƒè¯•ä¿¡æ¯çš„å·¥å…·*********************
+#define __DEBUG__//ä¸æƒ³ä»¤ä»£ç ä¸­çš„DEBUGæ˜¾ç¤ºä¿¡æ¯æ—¶å¯ä»¥æ³¨é‡Šè¯¥æŒ‡ä»¤æˆ–å°†å…¶æ”¹ä¸º#undef __DEBUG__ 
 #ifdef __DEBUG__
 #define DEBUG(format,...) printf("File: "__FILE__", Line: %05d "format"\n", __LINE__, ##__VA_ARGS__)
-//' ## 'µÄÒâË¼ÊÇ£¬Èç¹û¿É±ä²ÎÊı±»ºöÂÔ»òÎª¿Õ£¬½«Ê¹Ô¤´¦ÀíÆ÷£¨ preprocessor £©È¥³ıµôËüÇ°ÃæµÄÄÇ¸ö¶ººÅ¡£
+//' ## 'çš„æ„æ€æ˜¯ï¼Œå¦‚æœå¯å˜å‚æ•°è¢«å¿½ç•¥æˆ–ä¸ºç©ºï¼Œå°†ä½¿é¢„å¤„ç†å™¨ï¼ˆ preprocessor ï¼‰å»é™¤æ‰å®ƒå‰é¢çš„é‚£ä¸ªé€—å·ã€‚
 #else
-#define DEBUG(format,...)//¸ÃÖ¸ÁîµÄ×÷ÓÃÊÇÔÚÎ´¶¨Òå__DEBUG__ºêÇÒ´úÂëÖĞÊ¹ÓÃÁËDEBUGÓï¾äµÄÇé¿öÏÂ£¬±£Ö¤±àÒëÆ÷²»±¨´í£¬²¢ÇÒÁîDEBUG²»·¢»ÓÏÔÊ¾ĞÅÏ¢µÄ×÷ÓÃ
+#define DEBUG(format,...)//è¯¥æŒ‡ä»¤çš„ä½œç”¨æ˜¯åœ¨æœªå®šä¹‰__DEBUG__å®ä¸”ä»£ç ä¸­ä½¿ç”¨äº†DEBUGè¯­å¥çš„æƒ…å†µä¸‹ï¼Œä¿è¯ç¼–è¯‘å™¨ä¸æŠ¥é”™ï¼Œå¹¶ä¸”ä»¤DEBUGä¸å‘æŒ¥æ˜¾ç¤ºä¿¡æ¯çš„ä½œç”¨
 #endif
 
-//*************ÃüÁîĞĞÇ°¾°ºÍ±³¾°µÄÑÕÉ«******************
+//*************å‘½ä»¤è¡Œå‰æ™¯å’ŒèƒŒæ™¯çš„é¢œè‰²******************
 //B = bright
-#define BLACK       0
-#define BLUE        1
-#define GREEN       2
-#define PALEBLUE    3
-#define RED         4
-#define PURPLE      5
-#define YELLOW      6
-#define WHITE       7
-#define GRAY        8
-#define B_BLUE      9
-#define B_GREEN    10
-#define B_PALEBLUE 11
-#define B_RED      12
-#define B_PURPLE   13
-#define B_YELLOW   14
-#define B_WHITE    15
-//***************Ê±¼äµ¥Î»*****************************
+enum eColors {Black = 0,BLUE,GREEN, PALEBLUE, RED, PURPLE, YELLOW, WHITE,GRAY, B_BLUE, B_GREEN ,B_PALEBLUE, B_RED, B_PURPLE ,
+	      B_YELLOW ,B_WHITE};
+//***************æ—¶é—´å•ä½*****************************
 #define S   0
 #define MS  1
-//***************ÃÜÂë×î´ó³¤¶È*************************
+//***************å¯†ç æœ€å¤§é•¿åº¦*************************
 #define MAX_PASSWD_LEN 20
 
 using std::string;
@@ -60,34 +46,34 @@ class Console
 {
 public:
 	//***********************Color cout*********************************
-	//Êä³öÓï¾ä¾ù×Ô´ø»»ĞĞ
-	void error(string s);//Êä³ö´íÎóĞÅÏ¢
-	void warning(string s);//Êä³ö¾¯¸æĞÅÏ¢
-	//void prompt(string s);//Êä³öÌáÊ¾ĞÅÏ¢
-	void mark(string s);//Êä³ö±ê¼ÇĞÅÏ¢
-	void ask(string s);//Êä³öÎÊÌâ£¨Ä©Î²×Ô´ø>>£©
+	//è¾“å‡ºè¯­å¥å‡è‡ªå¸¦æ¢è¡Œ
+	void error(string s);//è¾“å‡ºé”™è¯¯ä¿¡æ¯
+	void warning(string s);//è¾“å‡ºè­¦å‘Šä¿¡æ¯
+	//void prompt(string s);//è¾“å‡ºæç¤ºä¿¡æ¯
+	void mark(string s);//è¾“å‡ºæ ‡è®°ä¿¡æ¯
+	void ask(string s);//è¾“å‡ºé—®é¢˜ï¼ˆæœ«å°¾è‡ªå¸¦>>ï¼‰
 	//***********************Cmd Parser********************************
-	//Ê¹ÓÃÎÄ¼şÀ´ÔØÈëÑ¡ÏîµÄ¸÷¸öÖµ£¬»¹Î´ÊµÏÖ
+	//ä½¿ç”¨æ–‡ä»¶æ¥è½½å…¥é€‰é¡¹çš„å„ä¸ªå€¼ï¼Œè¿˜æœªå®ç°
 	void initConfigureFileParser(string filePath);
-	//Ê¹ÓÃÃüÁîĞĞÀ´ÔØÈëÑ¡ÏîµÄ¸÷¸öÖµ
+	//ä½¿ç”¨å‘½ä»¤è¡Œæ¥è½½å…¥é€‰é¡¹çš„å„ä¸ªå€¼
 	void initCommandLineParser(int argc, char** argv, vector<string> options);
-	//ÉèÖÃÖ¸¶¨Ñ¡ÏîµÄÄ¬ÈÏÖµ£¬µ±ÃüÁîĞĞÃ»ÓĞÉèÖÃ¸Ã²ÎÊıÊ±¾ÍÊ¹ÓÃ¸ÃÄ¬ÈÏÖµ£¬½¨ÒéÎªÃ¿Ò»¸ö²ÎÊı¶¼ÉèÖÃÄ¬ÈÏÖµ
+	//è®¾ç½®æŒ‡å®šé€‰é¡¹çš„é»˜è®¤å€¼ï¼Œå½“å‘½ä»¤è¡Œæ²¡æœ‰è®¾ç½®è¯¥å‚æ•°æ—¶å°±ä½¿ç”¨è¯¥é»˜è®¤å€¼ï¼Œå»ºè®®ä¸ºæ¯ä¸€ä¸ªå‚æ•°éƒ½è®¾ç½®é»˜è®¤å€¼
 	template <class T> void setDefaultValue(string option, T value);
 	void setDefaultValues(string configureFile);
-	//»ñÈ¡Ö¸¶¨Ñ¡ÏîµÄ²ÎÊı£¬²¢Ö¸¶¨Æä·µ»ØÀàĞÍ£¬µ÷ÓÃ¸Ãº¯Êı±ØĞëÖ´ĞĞ·µ»ØÖµÀàĞÍ¡£ÀıÈçint value = CD.getParam<int>("-i");
+	//è·å–æŒ‡å®šé€‰é¡¹çš„å‚æ•°ï¼Œå¹¶æŒ‡å®šå…¶è¿”å›ç±»å‹ï¼Œè°ƒç”¨è¯¥å‡½æ•°å¿…é¡»æ‰§è¡Œè¿”å›å€¼ç±»å‹ã€‚ä¾‹å¦‚int value = CD.getParam<int>("-i");
 	template <class T> T getParam(string option);
 	map<string,string> getParams();
-	//**********************¼ÆÊ±****************************************
+	//**********************è®¡æ—¶****************************************
 	void turnOnTimer();
 	void turnOffTimer();
 	double getTimeDiff(int timeUnit=MS);
-	//**********************ÆäËü****************************************
-	//»ñÈ¡ÏµÍ³µ±Ç°Ê±¼ä£¬¸ñÊ½ÎªSat May 02 17:32:15 2015£¬×Ô´ø»»ĞĞ
+	//**********************å…¶å®ƒ****************************************
+	//è·å–ç³»ç»Ÿå½“å‰æ—¶é—´ï¼Œæ ¼å¼ä¸ºSat May 02 17:32:15 2015ï¼Œè‡ªå¸¦æ¢è¡Œ
 	void printCurrentTime();
 	void pause();
-	//»ñÈ¡²Ù×÷ÏµÍ³°æ±¾
+	//è·å–æ“ä½œç³»ç»Ÿç‰ˆæœ¬
 	string getSystemVersion();
-	//´´½¨ÃÜÂëÍ¬Ê±»ØÏÔĞÇºÅ£¬ÇëÔÚÊ¹ÓÃ¸Ãº¯ÊıÊ±Îñ±Ø±£´æÆä·µ»ØÖµ
+	//åˆ›å»ºå¯†ç åŒæ—¶å›æ˜¾æ˜Ÿå·ï¼Œè¯·åœ¨ä½¿ç”¨è¯¥å‡½æ•°æ—¶åŠ¡å¿…ä¿å­˜å…¶è¿”å›å€¼
 	string createPassword();
 private:
 	//***********************Color cout*********************************
@@ -100,7 +86,7 @@ private:
 	void exitWithHelp();
 	template <class Input, class Output>
 	Output convertDataType(const Input& a);
-	//***********************¼ÆÊ±**************************************
+	//***********************è®¡æ—¶**************************************
 	clock_t startTime;
 	clock_t endTime;
 };
@@ -112,7 +98,7 @@ template <class T> void Console::setDefaultValue(string option, T value)
 	{
 		if(0 == options.at(index).compare(option))
 		{
-			//¼ì²éÖµÊÇ·ñ±»Á¬×Ö·ûĞŞÊÎ£¬ĞŞÊÎÔòÈÏÎª·Ç·¨
+			//æ£€æŸ¥å€¼æ˜¯å¦è¢«è¿å­—ç¬¦ä¿®é¥°ï¼Œä¿®é¥°åˆ™è®¤ä¸ºéæ³•
 			if(0 == convertDataType<T, string>(value).substr(0,1).compare("-"))
 			{
 				error("The value of " + option + " is illegal");
